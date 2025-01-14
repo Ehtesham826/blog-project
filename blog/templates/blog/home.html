@@ -1,0 +1,840 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}BlogHub - Create a Blog Worth Sharing{% endblock %}
+
+{% block content %}
+<!-- Hero Section - Text Only -->
+<section class="hero-section">
+    <div class="container-fluid px-5">
+        <div class="row justify-content-center align-items-center hero-content">
+            <div class="col-lg-8 text-center">
+                <h1 class="hero-title" style="font-size: 3.5rem;">
+                    Create a blog<br>worth sharing
+                </h1>
+                <p class="hero-subtitle" style="font-size: 1.2rem;">
+                    Get a full suite of intuitive design features and powerful tools to create a unique blog that leaves a lasting impression.
+                </p>
+                {% if not user.is_authenticated %}
+                <div class="hero-buttons">
+                    <a href="{% url 'register' %}" class="btn btn-hero-primary" style="text-decoration: none;">
+                        START BLOGGING
+                    </a>
+                    <p class="hero-note">Try it for free and upgrade when you need.</p>
+                </div>
+                {% else %}
+                <div class="hero-buttons">
+                    <a href="{% url 'blog:post_create' %}" class="btn btn-hero-primary" style="text-decoration: none;">
+                        CREATE NEW POST
+                    </a>
+                    <a href="{% url 'blog:my_posts' %}" class="btn btn-hero-secondary" style="text-decoration: none;">
+                        MY POSTS
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Build Your Way Section -->
+<section class="section-build py-5 section-with-shadow">
+    <div class="container-fluid px-5">
+        <div class="row text-center mb-5">
+            <div class="col-12">
+                <h2 class="section-title">Build your blog your way</h2>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-box box-with-shadow">
+                    <div class="feature-icon-wrapper feature-icon-1">
+                        <i class="bi bi-palette"></i>
+                    </div>
+                    <h3 class="feature-title">Design a unique blog</h3>
+                    <p class="feature-description">Capture your brand's personality with a complete suite of advanced design features in our blog maker.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box box-with-shadow">
+                    <div class="feature-icon-wrapper feature-icon-2">
+                        <i class="bi bi-folder"></i>
+                    </div>
+                    <h3 class="feature-title">Organize with categories</h3>
+                    <p class="feature-description">Organize your content with categories and tags. Make it easy for readers to find what they love.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box box-with-shadow">
+                    <div class="feature-icon-wrapper feature-icon-3">
+                        <i class="bi bi-image"></i>
+                    </div>
+                    <h3 class="feature-title">Create with content in mind</h3>
+                    <p class="feature-description">Start publishing your unique content with rich text editor and image uploads.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Powerful Infrastructure Section -->
+<section class="section-infrastructure py-5 section-with-shadow">
+    <div class="container-fluid px-5">
+        <div class="row text-center mb-5">
+            <div class="col-12">
+                <h2 class="section-title section-title-2">The powerful infrastructure behind your blog</h2>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="infrastructure-box box-with-shadow">
+                    <div class="infrastructure-icon infrastructure-icon-1">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+                    <h3 class="infrastructure-title">Secure platform</h3>
+                    <p class="infrastructure-description">Full authentication system with password reset. Your content is safe and secure.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="infrastructure-box box-with-shadow">
+                    <div class="infrastructure-icon infrastructure-icon-2">
+                        <i class="bi bi-server"></i>
+                    </div>
+                    <h3 class="infrastructure-title">Reliable hosting</h3>
+                    <p class="infrastructure-description">Built on Django's robust framework, your blog is always up and running.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="infrastructure-box box-with-shadow">
+                    <div class="infrastructure-icon infrastructure-icon-3">
+                        <i class="bi bi-speedometer2"></i>
+                    </div>
+                    <h3 class="infrastructure-title">Faster loading</h3>
+                    <p class="infrastructure-description">Optimized performance with efficient database queries and caching for the best user experience.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Drive Traffic Section -->
+<section class="section-traffic py-5 section-with-shadow">
+    <div class="container-fluid px-5">
+        <div class="row text-center mb-5">
+            <div class="col-12">
+                <h2 class="section-title section-title-3">Drive traffic to your blog</h2>
+            </div>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-4">
+                <div class="traffic-feature-box box-with-shadow">
+                    <h3 class="traffic-feature-title">Grow your organic traffic</h3>
+                    <p class="traffic-feature-description">Get powerful search functionality to help readers find exactly what they're looking for.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="traffic-feature-box box-with-shadow">
+                    <h3 class="traffic-feature-title">Engage your online community</h3>
+                    <p class="traffic-feature-description">Build a community with our interactive commenting system. Connect with your readers.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="traffic-feature-box box-with-shadow">
+                    <h3 class="traffic-feature-title">Reach the right people</h3>
+                    <p class="traffic-feature-description">Organize content with categories and tags to help readers discover your posts.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Latest Posts Section -->
+<section class="section-posts py-5 section-with-shadow">
+    <div class="container-fluid px-5">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="section-title section-title-4">Latest Blog Posts</h2>
+                <p class="section-subtitle">Discover what our community is writing about</p>
+            </div>
+        </div>
+        
+        {% if latest_posts %}
+        <div class="row g-4">
+            {% for post in latest_posts %}
+            <div class="col-md-4">
+                <div class="post-card box-with-shadow">
+                    {% if post.image %}
+                    <img src="{{ post.image.url }}" class="post-card-image" alt="{{ post.title }}" style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px 12px 0 0;">
+                    {% else %}
+                    <div class="post-card-image-placeholder" style="height: 250px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px 12px 0 0;">
+                        <i class="bi bi-file-text" style="font-size: 3rem; color: white;"></i>
+                    </div>
+                    {% endif %}
+                    <div class="post-card-content">
+                        <div class="post-card-meta">
+                            <span><i class="bi bi-calendar"></i> {{ post.created_at|date:"M d, Y" }}</span>
+                            {% if post.category %}
+                            <span><i class="bi bi-folder"></i> {{ post.category.name }}</span>
+                            {% endif %}
+                        </div>
+                        <h3 class="post-card-title">
+                            <a href="{% url 'blog:post_detail' post.slug %}">{{ post.title }}</a>
+                        </h3>
+                        <p class="post-card-excerpt">{{ post.content|truncatewords:20 }}</p>
+                        <div class="post-card-footer">
+                            <a href="{% url 'blog:profile' post.author.username %}" class="post-card-author">
+                                <i class="bi bi-person"></i> {{ post.author.username }}
+                            </a>
+                            <a href="{% url 'blog:post_detail' post.slug %}" class="post-card-link">
+                                Read More <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-5">
+            <a href="{% url 'blog:post_list' %}" class="btn btn-primary btn-lg">View All Posts</a>
+        </div>
+        {% else %}
+        <div class="empty-state-large text-center py-5">
+            <i class="bi bi-journal-text empty-icon"></i>
+            <h3 class="mt-4">No posts yet</h3>
+            <p class="lead text-muted">Be the first to share your story with the world!</p>
+            {% if user.is_authenticated %}
+            <a href="{% url 'blog:post_create' %}" class="btn btn-primary btn-lg mt-3">Create First Post</a>
+            {% else %}
+            <a href="{% url 'register' %}" class="btn btn-primary btn-lg mt-3">Get Started</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- How to Create Section -->
+<section class="section-howto py-5 section-with-shadow">
+    <div class="container-fluid px-5">
+        <div class="row text-center mb-5">
+            <div class="col-12">
+                <h2 class="section-title section-title-5">How to create a blog for free</h2>
+                <p class="section-subtitle">Follow these steps to start building your blog today</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="step-box box-with-shadow">
+                    <div class="step-number step-number-1">1</div>
+                    <h3 class="step-title">Sign up for free</h3>
+                    <p class="step-description">Create your account and choose what kind of blog you want to create.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="step-box box-with-shadow">
+                    <div class="step-number step-number-2">2</div>
+                    <h3 class="step-title">Pick a blog name</h3>
+                    <p class="step-description">Let people know what your blog is all about with a memorable name.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="step-box box-with-shadow">
+                    <div class="step-number step-number-3">3</div>
+                    <h3 class="step-title">Write and publish</h3>
+                    <p class="step-description">Launch with posts you're passionate about. Share your thoughts and ideas.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Hero Section - Orange/Red Gradient */
+.hero-section {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 50%, #ff6b9d 100%);
+    padding: 60px 0;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.hero-section:hover {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.hero-content {
+    min-height: 60vh;
+}
+
+.section-with-shadow {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    margin: 2rem 0;
+    border-radius: 15px;
+}
+
+.section-with-shadow:hover {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    transform: translateY(-5px);
+}
+
+.box-with-shadow {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.box-with-shadow:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    transform: translateY(-8px);
+}
+
+.feature-box.box-with-shadow .feature-title,
+.feature-box.box-with-shadow .feature-description {
+    color: #2d3748;
+}
+
+.infrastructure-box.box-with-shadow .infrastructure-title,
+.infrastructure-box.box-with-shadow .infrastructure-description {
+    color: #2d3748;
+}
+
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+    background-size: cover;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.hero-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+
+.hero-image {
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    letter-spacing: -1px;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    opacity: 0.95;
+    line-height: 1.6;
+}
+
+.hero-buttons {
+    margin-top: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.btn-hero-primary {
+    background: white;
+    color: #ff6b6b;
+    padding: 18px 40px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    border: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-decoration: none !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+
+.btn-hero-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    color: #ff6b6b;
+    text-decoration: none;
+}
+
+.btn-hero-secondary {
+    background: transparent;
+    color: white;
+    padding: 18px 40px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    border: 2px solid white;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-decoration: none !important;
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+.btn-hero-secondary:hover {
+    background: white;
+    color: #ff6b6b;
+    transform: translateY(-3px);
+    text-decoration: none;
+}
+
+.hero-note {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+
+/* Blog Preview Card */
+.blog-preview-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    overflow: hidden;
+    max-width: 400px;
+    margin: 0 auto;
+    transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+    transition: transform 0.3s ease;
+}
+
+.blog-preview-card:hover {
+    transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+}
+
+.blog-preview-header {
+    background: #f5f5f5;
+    padding: 12px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.blog-preview-nav {
+    display: flex;
+    gap: 8px;
+}
+
+.blog-preview-nav span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ddd;
+}
+
+.blog-preview-content {
+    padding: 20px;
+    background: white;
+}
+
+.blog-preview-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.blog-preview-post-img {
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.blog-preview-post-title {
+    width: 80%;
+    height: 20px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.blog-preview-post-text {
+    width: 100%;
+    height: 15px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.blog-preview-post-text:last-child {
+    width: 60%;
+}
+
+/* Section Styles */
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 1rem;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: #718096;
+    margin-bottom: 3rem;
+}
+
+/* Build Section - Blue Theme */
+.section-build {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 60px 0;
+    color: white;
+    width: 100%;
+}
+
+.section-build .section-title {
+    color: white;
+}
+
+.section-build .feature-description {
+    color: rgba(255,255,255,0.9);
+}
+
+.feature-box {
+    text-align: center;
+}
+
+.feature-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: white;
+    font-size: 2rem;
+}
+
+.feature-icon-1 {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.feature-icon-2 {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.feature-icon-3 {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.feature-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.75rem;
+}
+
+/* Infrastructure Section - Green Theme */
+.section-infrastructure {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    padding: 60px 0;
+    color: white;
+    width: 100%;
+}
+
+.section-title-2 {
+    color: white;
+}
+
+.infrastructure-box {
+    text-align: center;
+}
+
+.infrastructure-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: white;
+    font-size: 2rem;
+}
+
+.infrastructure-icon-1 {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.infrastructure-icon-2 {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.infrastructure-icon-3 {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.infrastructure-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.75rem;
+}
+
+.infrastructure-description {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.6;
+}
+
+/* Traffic Section - Yellow/Orange Theme */
+.section-traffic {
+    padding: 60px 0;
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    width: 100%;
+}
+
+.section-title-3 {
+    color: #2d3748;
+}
+
+.traffic-feature-box {
+    text-align: center;
+    height: 100%;
+}
+
+.traffic-feature-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 1rem;
+}
+
+.traffic-feature-description {
+    font-size: 1rem;
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+
+.traffic-chart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    height: 300px;
+    gap: 10px;
+}
+
+.chart-bar {
+    flex: 1;
+    background: linear-gradient(180deg, #f6d365 0%, #fda085 100%);
+    border-radius: 8px 8px 0 0;
+    min-height: 50px;
+    animation: growBar 1s ease-out;
+}
+
+@keyframes growBar {
+    from {
+        height: 0;
+    }
+}
+
+/* Posts Section - Pink/Purple Theme */
+.section-posts {
+    padding: 60px 0;
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    width: 100%;
+}
+
+.section-title-4 {
+    color: #2d3748;
+}
+
+.post-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+
+
+.post-card-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-card-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: #718096;
+    margin-bottom: 1rem;
+}
+
+.post-card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 0.75rem;
+}
+
+.post-card-title a {
+    color: #2d3748;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.post-card-title a:hover {
+    color: #ff6b6b;
+}
+
+.post-card-excerpt {
+    color: #718096;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+    font-size: 0.95rem;
+}
+
+.post-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.post-card-author {
+    color: #ff6b6b;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.post-card-link {
+    color: #ff6b6b;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.post-card-link:hover {
+    gap: 1rem;
+}
+
+/* How To Section - Teal/Cyan Theme */
+.section-howto {
+    padding: 60px 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    width: 100%;
+}
+
+.section-title-5 {
+    color: white;
+}
+
+.step-box {
+    text-align: center;
+    padding: 2rem;
+}
+
+.step-number {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.step-number-1 {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.step-number-2 {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.step-number-3 {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.step-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 0.75rem;
+}
+
+.step-description {
+    font-size: 1rem;
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+.empty-state-large {
+    padding: 4rem 2rem;
+}
+
+.empty-icon {
+    font-size: 5rem;
+    color: #cbd5e0;
+}
+
+.min-vh-60 {
+    min-height: 60vh;
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .btn-hero-secondary {
+        margin-left: 0;
+        margin-top: 1rem;
+        display: block;
+    }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}

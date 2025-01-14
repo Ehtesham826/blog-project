@@ -1,0 +1,48 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}Login - BlogHub{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-lg no-transitions" style="transition: none !important; animation: none !important; transform: none !important;">
+            <div class="card-header text-white" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); border-radius: 15px 15px 0 0;">
+                <h3 class="mb-0"><i class="bi bi-box-arrow-in-right"></i> Login</h3>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label">Username</label>
+                        <input type="text" name="username" class="form-control" id="id_username" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_password" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" id="id_password" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <a href="{% url 'password_reset' %}">Forgot your password?</a>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-box-arrow-in-right"></i> Login
+                        </button>
+                    </div>
+                </form>
+                
+                <hr>
+                <p class="text-center">Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
+
+

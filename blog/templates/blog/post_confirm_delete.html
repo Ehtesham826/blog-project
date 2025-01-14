@@ -1,0 +1,36 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}Delete Post - BlogHub{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-lg">
+            <div class="card-header text-white" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); border-radius: 15px 15px 0 0;">
+                <h3 class="mb-0"><i class="bi bi-exclamation-triangle"></i> Delete Post</h3>
+            </div>
+            <div class="card-body">
+                <p>Are you sure you want to delete the post <strong>"{{ post.title }}"</strong>?</p>
+                <p class="text-danger">This action cannot be undone.</p>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% url 'blog:post_detail' post.slug %}" class="btn btn-secondary">
+                            Cancel
+                        </a>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-trash"></i> Delete Post
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
+
+

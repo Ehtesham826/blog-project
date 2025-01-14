@@ -1,0 +1,98 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}{{ title }} - BlogHub{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-lg no-transitions" style="transition: none !important; animation: none !important; transform: none !important;">
+            <div class="card-header text-white" style="background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%); border-radius: 15px 15px 0 0;">
+                <h3 class="mb-0"><i class="bi bi-pencil-square"></i> {{ title }}</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.title.id_for_label }}" class="form-label">Title</label>
+                        {{ form.title }}
+                        {% if form.title.errors %}
+                        <div class="text-danger">{{ form.title.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.slug.id_for_label }}" class="form-label">Slug</label>
+                        {{ form.slug }}
+                        <small class="form-text text-muted">URL-friendly version of the title (e.g., my-awesome-post)</small>
+                        {% if form.slug.errors %}
+                        <div class="text-danger">{{ form.slug.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.category.id_for_label }}" class="form-label">Category</label>
+                        {{ form.category }}
+                        {% if form.category.errors %}
+                        <div class="text-danger">{{ form.category.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.tags.id_for_label }}" class="form-label">Tags</label>
+                        <div class="border rounded p-3">
+                            {{ form.tags }}
+                        </div>
+                        {% if form.tags.errors %}
+                        <div class="text-danger">{{ form.tags.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.content.id_for_label }}" class="form-label">Content</label>
+                        {{ form.content }}
+                        {% if form.content.errors %}
+                        <div class="text-danger">{{ form.content.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.image.id_for_label }}" class="form-label">Featured Image</label>
+                        {{ form.image }}
+                        {% if form.image.errors %}
+                        <div class="text-danger">{{ form.image.errors }}</div>
+                        {% endif %}
+                        {% if post and post.image %}
+                        <div class="mt-2">
+                            <img src="{{ post.image.url }}" alt="Current image" class="img-thumbnail" style="max-width: 200px;">
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.status.id_for_label }}" class="form-label">Status</label>
+                        {{ form.status }}
+                        {% if form.status.errors %}
+                        <div class="text-danger">{{ form.status.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% if post %}{% url 'blog:post_detail' post.slug %}{% else %}{% url 'blog:post_list' %}{% endif %}" class="btn btn-secondary">
+                            Cancel
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-circle"></i> Save Post
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
+
+
